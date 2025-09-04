@@ -38,9 +38,6 @@ Most mock interviews feel static: fixed question lists and vague feedback. I wan
 
 ```bash
 python -m venv .venv
-# mac/linux
-source .venv/bin/activate
-# windows
 .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env  # add your key later
