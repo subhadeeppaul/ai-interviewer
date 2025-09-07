@@ -29,8 +29,6 @@ Definitions:
 """).strip()
 
 
-# ---- Added for Level 4 (evaluation) ----
-# ---- Stronger evaluator prompt (replace existing EVAL_PROMPT) ----
 EVAL_PROMPT = dedent("""
 You are an expert technical interviewer and strict grader. Evaluate the candidate's answer
 to the given question with care and be conservative with high scores.
@@ -92,7 +90,6 @@ Return JSON with the fields described above.
 
 
 
-# ---- Added for Level 5 (follow-up) ----
 FOLLOWUP_PROMPT = dedent("""
 Draft ONE focused follow-up that guides the candidate toward a better answer.
 
@@ -112,7 +109,6 @@ Return ONLY the follow-up question text.
 
 
 
-# ---- Added for Level 6 (summary) ----
 SUMMARY_PROMPT_TMPL = Template(dedent("""
 You are summarizing a short technical interview.
 

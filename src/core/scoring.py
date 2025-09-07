@@ -12,7 +12,7 @@ def recompute_overall(acc: float, cla: float, dep: float) -> float:
     return round((clamp_score(acc) + clamp_score(cla) + clamp_score(dep)) / 3.0, 2)
 
 def normalize_eval(payload: Dict) -> Dict:
-    """Normalize/validate the eval JSON returned by the model."""
+   
     defaults = {
         "accuracy": 0.0,
         "clarity": 0.0,
@@ -26,7 +26,7 @@ def normalize_eval(payload: Dict) -> Dict:
     if not isinstance(payload, dict):
         payload = {}
     out = {**defaults, **payload}
-    # coerce types
+    
     out["accuracy"] = clamp_score(out.get("accuracy"))
     out["clarity"] = clamp_score(out.get("clarity"))
     out["depth"] = clamp_score(out.get("depth"))
