@@ -3,7 +3,7 @@ import streamlit as st
 from pathlib import Path
 import sys
 
-# Add project root to sys.path
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from app.nodes import (
@@ -19,24 +19,9 @@ from graph.flow import build_graph
 from core.state import InterviewState
 from llm.base import build_llm
 
-
-
-
-
-# Add project root to sys.path
-
-# from src.graph.flow import build_graph
-# from src.core.state import InterviewState
-# from src.app.nodes import (
-#     node_next_question,
-#     node_evaluate,
-#     node_followup,
-#     node_increment_or_finish,
-#     node_summary,
-# )
 from src.app.nodes import MAX_FOLLOWUPS_PER_Q
 
-# ---------- Initialize state ----------
+
 if "state" not in st.session_state:
     st.session_state.state = InterviewState(
         topics=["Machine Learning"],
@@ -62,7 +47,7 @@ if "state" not in st.session_state:
 state = st.session_state.state
 st.title("🧠 AI Interviewer")
 
-# ---------- Sidebar settings ----------
+
 st.sidebar.header("Interview Settings")
 topics_input = st.sidebar.text_input("Topics (comma-separated)", value="Machine Learning")
 difficulty_input = st.sidebar.selectbox("Difficulty", ["easy", "mixed", "hard"], index=0)
@@ -71,40 +56,39 @@ question_type_input = st.sidebar.selectbox(
     "Question Type", ["coding", "theory", "design", "debugging", "mixed"], index=4
 )
 
-# Update state from sidebar
 state.topics = [t.strip() for t in topics_input.split(",") if t.strip()]
 state.difficulty = difficulty_input
 state.max_q = num_questions
 state.question_type = question_type_input
 
-# ---------- Get next question if needed ----------
+
 if not state.current_q and not state.followup_mode:
     state = node_next_question(state)
 
 st.write(f"**Question:** {state.current_q}")
 
-# ---------- Answer input ----------
+
 user_answer = st.text_area("Your Answer:")
 
 if st.button("Submit Answer"):
-    # Append user answer
+   
     state.answers.append(user_answer.strip() or "(no answer)")
 
-    # Evaluate answer
+  
     state = node_evaluate(state)
 
-    # Handle follow-up
+  
     if state.last_eval.get("followup_needed") and state.followup_depth < MAX_FOLLOWUPS_PER_Q:
         state = node_followup(state)
         st.success("Follow-up question triggered!")
     else:
         state = node_increment_or_finish(state)
 
-    # Refresh session state
+    
     st.session_state.state = state
-    st.experimental_rerun()  # Refresh UI to show new question or follow-up
+    st.experimental_rerun() 
 
-# ---------- Show last evaluation ----------
+
 if state.evals:
     st.subheader("Last Answer Evaluation")
     last_eval = state.evals[-1]
@@ -115,7 +99,7 @@ if state.evals:
     if last_eval.get("misconceptions"):
         st.write("Misconceptions:", ", ".join(last_eval.get("misconceptions")))
 
-# ---------- Show summary if done ----------
+
 if state.done:
     state = node_summary(state)
     st.subheader("Interview Summary")
