@@ -1,7 +1,31 @@
-[
-  {
-    "topic": "JavaScript",
-    "question": "What is a closure and how is it used?",
-    "keywords": ["function", "lexical scope", "inner function"]
+{
+  "Python": {
+    "theory": [
+      "Explain generators in Python and when to use them.",
+      "What are decorators and how do they work internally?",
+      "Describe the GIL and its implications for threading vs multiprocessing."
+    ],
+    "coding": [
+      "Write a function to deduplicate a list while preserving order.",
+      "Given a list of dicts with 'name' and 'score', return the top-3 by score."
+    ],
+    "design": [
+      "How would you design a plugin system for a CLI tool in Python?",
+      "Design a rate limiter for an API using Python primitives."
+    ],
+    "debugging": [
+      "Given a function that mutates a list with slicing, explain why it didn’t change the caller list and fix it.",
+      "This code leaks file descriptors; identify the cause and fix: open(...); read(); return data"
+    ]
+  },
+  "JavaScript": {
+    "theory": [
+      "Explain event loop and microtasks vs macrotasks.",
+      "What is prototypal inheritance and how is it different from classical?"
+    ],
+    "coding": [
+      "Implement debounce(fn, delay).",
+      "Given an array, return a new array with unique values (ES6+)."
+    ]
   }
-]
+}
