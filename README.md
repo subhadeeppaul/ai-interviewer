@@ -34,17 +34,6 @@ source .venv/bin/activate
 ````
 
 
-## Setup Environment and Dependencies
-
-### Windows
-
-1. **Create and activate a virtual environment**
-
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-````
-
 
 ## Install Python Dependencies
 
