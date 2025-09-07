@@ -15,7 +15,6 @@ def _extract_json_block(text: str) -> str:
     if m:
         return m.group(1)
 
-    # brace scanner
     start = text.find("{")
     while start != -1:
         depth = 0
