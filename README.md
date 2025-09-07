@@ -13,6 +13,7 @@ An AI-powered technical interviewer that dynamically generates questions, evalua
 
 ````bash
 ollama pull llama2
+````
 
 ## Installation
 
@@ -21,18 +22,16 @@ ollama pull llama2
 ```bash
 git clone https://github.com/subhadeeppaul/ai-interviewer.git
 cd ai-interviewer
-
+````
 
 ## Setup Environment and Dependencies
 
 ### Create and activate a virtual environment
 
-- **Linux/macOS:**
-
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-
+````
 
 
 ## Setup Environment and Dependencies
@@ -44,28 +43,26 @@ source .venv/bin/activate
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
-
+````
 
 
 ## Install Python Dependencies
 
 ```bash
 pip install -r requirements.txt
-
+````
 
 ## Configure Ollama Environment (Optional)
 
-- **Linux/macOS:**
-
 ```bash
 export OLLAMA_MODEL="llama2"
-
+````
 
 ### Windows
 
 ```bash
 setx OLLAMA_MODEL "llama2"
-
+````
 
 ## Usage
 
@@ -73,7 +70,7 @@ Run the CLI interview:
 
 ```bash
 python -m src.app interview --topic "Machine Learning" --difficulty easy --questions 4 --type mixed --stdin
-
+````
 
 
 ## Parameters
@@ -90,7 +87,7 @@ python -m src.app interview --topic "Machine Learning" --difficulty easy --quest
 
 ```bash
 python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --type coding --stdin
-
+```
 
 ## How It Works
 
@@ -127,7 +124,7 @@ python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --
 
 ```bash
 $ python -m src.app interview --topic "Machine Learning" --difficulty easy --questions 2 --type mixed --stdin
-
+```
 
 
 ### Example Output
@@ -148,5 +145,6 @@ Your answer (blank line to finish): Clustering for unsupervised, regression for 
 
 → Scores: accuracy=6.0, clarity=7.0, depth=5.0, overall=6.0
 → Rationale: Examples provided, explanation improved.
+```
 
 ````
