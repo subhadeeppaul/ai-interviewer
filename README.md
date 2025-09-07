@@ -11,9 +11,9 @@ An AI-powered technical interviewer that dynamically generates questions, evalua
 - **Ollama installed**: [https://ollama.com/docs](https://ollama.com/docs)
 - Download a supported model in Ollama (e.g., `llama2`):
 
-````bash
+```bash
 ollama pull llama2
-````
+```
 
 ## Installation
 
@@ -22,7 +22,7 @@ ollama pull llama2
 ```bash
 git clone https://github.com/subhadeeppaul/ai-interviewer.git
 cd ai-interviewer
-````
+```
 
 ## Setup Environment and Dependencies
 
@@ -31,27 +31,25 @@ cd ai-interviewer
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-````
-
-
+```
 
 ## Install Python Dependencies
 
 ```bash
 pip install -r requirements.txt
-````
+```
 
 ## Configure Ollama Environment (Optional)
 
 ```bash
-export OLLAMA_MODEL="llama2"
-````
+export OLLAMA_MODEL="mistrel"
+```
 
 ### Windows
 
 ```bash
-setx OLLAMA_MODEL "llama2"
-````
+setx OLLAMA_MODEL "mistrel"
+```
 
 ## Usage
 
@@ -59,18 +57,17 @@ Run the CLI interview:
 
 ```bash
 python -m src.app interview --topic "Machine Learning" --difficulty easy --questions 4 --type mixed --stdin
-````
-
+```
 
 ## Parameters
 
-| Parameter    | Description                                         | Example                         |
-|-------------|-----------------------------------------------------|---------------------------------|
-| --topic      | Topic of interview questions                        | "Machine Learning"              |
-| --difficulty | Difficulty level of questions (easy, medium, hard, mixed) | easy                            |
-| --questions  | Number of main questions                            | 4                               |
-| --type       | Question type (coding, theory, design, mixed)      | mixed                           |
-| --stdin      | Enables manual multi-line input                     | (present for CLI input)         |
+| Parameter    | Description                                               | Example                 |
+| ------------ | --------------------------------------------------------- | ----------------------- |
+| --topic      | Topic of interview questions                              | "Machine Learning"      |
+| --difficulty | Difficulty level of questions (easy, medium, hard, mixed) | easy                    |
+| --questions  | Number of main questions                                  | 4                       |
+| --type       | Question type (coding, theory, design, mixed)             | mixed                   |
+| --stdin      | Enables manual multi-line input                           | (present for CLI input) |
 
 ### Example Command
 
@@ -83,14 +80,16 @@ python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --
 - **Next Question Node:** Picks a new question based on topic and difficulty.
 - **Ask Node:** Displays the question and captures user input.
 - **Evaluate Node:** Scores the answer using Ollama LLM on:
+
   - accuracy
   - clarity
   - depth
   - overall
 
-  *Short or vague answers are penalized automatically.*
+  _Short or vague answers are penalized automatically._
 
 - **Follow-up Node:** Generates a follow-up question if the answer is weak.
+
   - Limited to `MAX_FOLLOWUPS_PER_Q` per main question
   - Ensures recursion stops and avoids `GraphRecursionError`
 
@@ -101,14 +100,16 @@ python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --
   - Strengths
   - Recommendations
 
+## Optional Features
 
+- **Answer Scoring** ✅ Implemented  
+  (Evaluates accuracy, clarity, depth, overall)
 
 ### Example Run
 
 ```bash
 $ python -m src.app interview --topic "Machine Learning" --difficulty easy --questions 2 --type mixed --stdin
 ```
-
 
 ### Example Output
 
@@ -130,4 +131,6 @@ Your answer (blank line to finish): Clustering for unsupervised, regression for 
 → Rationale: Examples provided, explanation improved.
 ```
 
-````
+```
+
+```
