@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 
 try:
     from ollama import Client as Ollama
-except Exception as e:  # pragma: no cover
+except Exception as e: 
     Ollama = None
 
 
@@ -30,24 +30,18 @@ class OllamaClient:
         host = os.getenv("OLLAMA_HOST", "http://localhost:11434")
         self.model = os.getenv("OLLAMA_MODEL", "mistral")
 
-        # sane, fast defaults (override via env or kwargs)
         self.default_options: Dict[str, Any] = {
             "temperature": _float_env("OLLAMA_TEMPERATURE", 0.3),
             "top_p": _float_env("OLLAMA_TOP_P", 0.9),
             "num_ctx": _int_env("OLLAMA_NUM_CTX", 2048),
             "num_predict": _int_env("OLLAMA_NUM_PREDICT", 256),
-            # you can add others like "repeat_penalty", "stop", etc.
+           
         }
 
         self.client = Ollama(host=host)
 
     def chat(self, messages: List[Dict], **kwargs) -> str:
-        """
-        messages: [{"role": "system"|"user"|"assistant", "content": "..."}]
-        kwargs may include `options` dict to override generation.
-        returns: text content (str)
-        """
-        # merge options: caller > env/defaults
+       
         user_options = kwargs.pop("options", {}) or {}
         options = {**self.default_options, **user_options}
         resp = self.client.chat(model=self.model, messages=messages, stream=False, options=options)
