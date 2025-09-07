@@ -5,19 +5,16 @@ Param(
   [string]$Type = "mixed"
 )
 
-# Ensure we run from repo root (folder that contains "src")
 Set-Location -Path (Split-Path -Parent $PSCommandPath)
 
 Write-Host "=== AI Interviewer Demo ===" -ForegroundColor Cyan
 Write-Host "Topic: $Topic | Difficulty: $Difficulty | Questions: $Questions | Type: $Type"
 
-# Health check (ignore creativity)
 python -m src.app ping Respond with exactly: pong | Out-Host
 
-# One sample question
 python -m src.app ask-one --topic $Topic --difficulty $Difficulty --type $Type | Out-Host
 
-# Full interview (+ save log JSON)
+
 $logDir = "runs"
 $newDir = New-Item -ItemType Directory -Force -Path $logDir
 $log = Join-Path $logDir ("demo_{0}.json" -f (Get-Date).ToString("yyyyMMdd_HHmmss"))

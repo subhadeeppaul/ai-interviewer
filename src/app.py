@@ -13,18 +13,13 @@ from .llm.base import build_llm
 app = typer.Typer(help="AI Interviewer — CLI", no_args_is_help=True)
 
 
-# ---------- helper ----------
+
 def join_text(parts: Optional[List[str]], default: str = "") -> str:
-    """Join list of words into a single string; fallback to default."""
     return " ".join(parts or []).strip() or default
 
 
 @app.command()
 def ping(text: List[str] = typer.Argument(None, metavar="TEXT...", help="Prompt to send")):
-    """
-    Example:
-      python -m src.app ping Respond with exactly: pong
-    """
     load_dotenv()
     llm = build_llm()
     prompt = join_text(text, "Respond with exactly: pong")
@@ -42,11 +37,7 @@ def ask_one(
     difficulty: str = typer.Option("mixed", "--difficulty", "-d", help="easy|mixed|hard"),
     qtype: str = typer.Option("mixed", "--type", "-y", help="coding|theory|design|debugging|mixed"),
 ):
-    """
-    Generate ONE interview question for a topic.
-    Example:
-      python -m src.app ask-one --topic Python --difficulty mixed --type theory
-    """
+  
     from .services.questions import generate_question
     load_dotenv()
     q = generate_question(topic=topic, difficulty=difficulty, question_type=qtype, asked_so_far=[])
@@ -59,9 +50,7 @@ def grade_answer(
     question: str = typer.Option(..., "--question", "-q", help="The interview question"),
     answer: List[str] = typer.Argument(None, metavar="ANSWER...", help="Your answer"),
 ):
-    """
-    Score an answer for accuracy, clarity, depth; signal if follow-up is needed.
-    """
+
     load_dotenv()
     from .services.evaluate import evaluate_answer
 
@@ -87,9 +76,6 @@ def next_step(
     question: str = typer.Option(..., "--question", "-q", help="The original interview question"),
     answer: List[str] = typer.Argument(None, metavar="ANSWER...", help="Candidate answer"),
 ):
-    """
-    Evaluate an answer and, if needed, generate a targeted follow-up prompt.
-    """
     load_dotenv()
     from .services.evaluate import evaluate_answer
     from .services.followup import generate_followup
@@ -127,16 +113,11 @@ def interview(
     log_json: Optional[str] = typer.Option(None, "--log-json", help="Path to save the full interview session as JSON"),
     stdin_mode: bool = typer.Option(False, "--stdin", help="Type answers in stdin (multi-line; end with blank line)"),
 ):
-    """
-    Run a full interactive interview with multi-topic rotation, follow-ups, and summary.
-    """
+
     load_dotenv()
     from .graph.flow import build_graph
-
-    # Parse topics list
     topics_list = [t.strip() for t in topics.split(",") if t.strip()] if topics else [topic]
 
-    # Initialize state
     init_state: Dict = {
     "topics": topics_list,
     "topic_index": 0,
@@ -151,13 +132,12 @@ def interview(
     "question_type": qtype,
     "stdin_mode": stdin_mode,
     "difficulty_counts": {"easy": 0, "medium": 0, "hard": 0},
-    "steps": 0,   # <-- add this
+    "steps": 0, 
     "topic_performance": {},
-}
+    }
 
 
-
-    # Build graph and run
+        
     graph = build_graph()
     final_state = graph.invoke(init_state)
 
