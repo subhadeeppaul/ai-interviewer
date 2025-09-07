@@ -13,6 +13,7 @@ An AI-powered technical interviewer that dynamically generates questions, evalua
 
 ````bash
 ollama pull llama2
+````
 
 ## Installation
 
@@ -21,29 +22,16 @@ ollama pull llama2
 ```bash
 git clone https://github.com/subhadeeppaul/ai-interviewer.git
 cd ai-interviewer
-
+````
 
 ## Setup Environment and Dependencies
 
 ### Create and activate a virtual environment
 
-- **Linux/macOS:**
-
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-
-
-
-## Setup Environment and Dependencies
-
-### Windows
-
-1. **Create and activate a virtual environment**
-
-```bash
-python -m venv .venv
-.venv\Scripts\activate
+````
 
 
 
@@ -51,21 +39,19 @@ python -m venv .venv
 
 ```bash
 pip install -r requirements.txt
-
+````
 
 ## Configure Ollama Environment (Optional)
 
-- **Linux/macOS:**
-
 ```bash
 export OLLAMA_MODEL="llama2"
-
+````
 
 ### Windows
 
 ```bash
 setx OLLAMA_MODEL "llama2"
-
+````
 
 ## Usage
 
@@ -73,7 +59,7 @@ Run the CLI interview:
 
 ```bash
 python -m src.app interview --topic "Machine Learning" --difficulty easy --questions 4 --type mixed --stdin
-
+````
 
 
 ## Parameters
@@ -90,7 +76,7 @@ python -m src.app interview --topic "Machine Learning" --difficulty easy --quest
 
 ```bash
 python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --type coding --stdin
-
+```
 
 ## How It Works
 
@@ -115,19 +101,13 @@ python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --
   - Strengths
   - Recommendations
 
-### Persistent Issues / Caveats
 
-- **Follow-ups:** Even vague answers may trigger follow-ups; limited by `MAX_FOLLOWUPS_PER_Q`.
-- **Recursion errors:** LangGraph may throw `GraphRecursionError` if follow-ups aren’t capped or done-checks are missing. Current code resets `followup_mode` and `followup_depth` to prevent infinite loops.
-- **Answer scoring:** Ollama evaluates any input, but very short or irrelevant answers may get low but non-zero scores.
-- **Multi-line input:** Use an empty line to finish your answer.
-- **LLM latency:** Responses depend on your local Ollama model and system speed.
 
 ### Example Run
 
 ```bash
 $ python -m src.app interview --topic "Machine Learning" --difficulty easy --questions 2 --type mixed --stdin
-
+```
 
 
 ### Example Output
@@ -148,5 +128,6 @@ Your answer (blank line to finish): Clustering for unsupervised, regression for 
 
 → Scores: accuracy=6.0, clarity=7.0, depth=5.0, overall=6.0
 → Rationale: Examples provided, explanation improved.
+```
 
 ````
