@@ -16,13 +16,11 @@ def _load_seeds() -> Dict[str, Dict[str, List[str]]]:
         return {}
 
 def _pick_type(requested: QuestionType, asked: List[str] | None) -> str:
-    """Pick a question type, balancing least-used if 'mixed'."""
     if requested != "mixed":
         return requested
     types = ["coding", "theory", "design", "debugging"]
     asked = asked or []
 
-    # ensure all asked items are strings
     asked_strs = []
     for q in asked:
         if isinstance(q, dict):
@@ -41,7 +39,6 @@ def _tag(q: str, t: str) -> str:
     return f"[{ttag}] {q}"
 
 def _strip_tag(q: str) -> str:
-    """Remove type tag from a question string."""
     if q.startswith("["):
         close = q.find("]")
         if close != -1:
@@ -49,14 +46,12 @@ def _strip_tag(q: str) -> str:
     return q
 
 def _pick_seed_question(topic: str, qtype: str, asked: List[str]) -> Optional[str]:
-    """Return a tagged seed question not yet used, otherwise None."""
     seeds = _load_seeds()
     topic_bucket = seeds.get(topic) or {}
     type_bucket = topic_bucket.get(qtype) or []
     if not type_bucket:
         return None
 
-    # normalize asked set: dicts -> question strings
     asked_strs = []
     for q in asked:
         if isinstance(q, dict):
@@ -76,16 +71,16 @@ def generate_question(
     question_type: QuestionType = "mixed",
     asked_so_far: List[str] | None = None,
 ) -> str:
-    """Generate a single interview question (seed first, else LLM)."""
+
     asked = asked_so_far or []
     qtype = _pick_type(question_type, asked)
 
-    # 1) try seed first
+   
     seed_q = _pick_seed_question(topic, qtype, asked)
     if seed_q:
         return seed_q
 
-    # 2) fall back to LLM
+    
     llm = build_llm()
     user_prompt = QUESTION_GEN_PROMPT.format(
         topic=topic, difficulty=difficulty, question_type=qtype

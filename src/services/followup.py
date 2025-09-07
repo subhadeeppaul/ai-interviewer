@@ -13,8 +13,8 @@ def generate_followup(question: str, answer: str, hint: str = "", misconceptions
         misconceptions=", ".join(misconceptions or []),
     )
     out = llm.chat([{"role": "user", "content": msg}]).strip()
-    # Normalize to end with '?'
+
     if not out.endswith("?"):
         out = out.rstrip(".") + "?"
-    # Tagging follow-ups is useful later for counting main vs follow-up Qs
+
     return f"(Follow-up) {out}"
