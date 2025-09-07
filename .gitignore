@@ -1,21 +1,16 @@
-﻿# Python venv & caches
-.venv/
+﻿.venv/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Environment files
 .env
 
-# VS Code (keep settings.json only)
 .vscode/*
 !.vscode/settings.json
 
-# OS junk
 .DS_Store
 
-# Build artifacts
 dist/
 build/
 *.egg-info/
