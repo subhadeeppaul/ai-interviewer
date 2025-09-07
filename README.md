@@ -101,13 +101,7 @@ python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --
   - Strengths
   - Recommendations
 
-### Persistent Issues / Caveats
 
-- **Follow-ups:** Even vague answers may trigger follow-ups; limited by `MAX_FOLLOWUPS_PER_Q`.
-- **Recursion errors:** LangGraph may throw `GraphRecursionError` if follow-ups aren’t capped or done-checks are missing. Current code resets `followup_mode` and `followup_depth` to prevent infinite loops.
-- **Answer scoring:** Ollama evaluates any input, but very short or irrelevant answers may get low but non-zero scores.
-- **Multi-line input:** Use an empty line to finish your answer.
-- **LLM latency:** Responses depend on your local Ollama model and system speed.
 
 ### Example Run
 
