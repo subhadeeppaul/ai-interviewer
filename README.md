@@ -1,47 +1,45 @@
-# AI Interviewer (Ollama + LangGraph)
+# AI Interviewer CLI (Ollama LLM)
 
-Short, topic-focused **technical interviews** powered by a local LLM (Ollama) with **branching follow-ups, scoring, and a final summary**.
-
-- **Stack:** Python, Ollama (Mistral by default), LangGraph, Typer (CLI)
-- **Modes:** coding / theory / design / debugging (or **mixed**)
-- **Branching:** weak answers trigger targeted follow-ups
-- **Summary:** graded feedback with strengths & recommendations
-- **Export:** `--log-json` saves full session
+An AI-powered technical interviewer that dynamically generates questions, evaluates answers, and provides detailed feedback. Built using **Python**, **LangGraph**, and **Ollama** for local LLM inference.
 
 ---
 
-## Quickstart
+## Features
+
+- Interactive command-line interface (CLI) interview
+- Supports dynamic question generation by topic and difficulty
+- Evaluates answers based on **accuracy, clarity, and depth**
+- Tracks per-topic performance and overall score
+- Follow-up questions triggered for weak or incomplete answers
+- Generates a final interview summary with strengths and recommendations
+
+---
+
+## Prerequisites
+
+- Python >= 3.10
+- Virtual environment recommended (`venv` or `conda`)
+- **Ollama installed**: [https://ollama.com/docs](https://ollama.com/docs)
+- Download a supported model in Ollama (e.g., `llama2` or `mistral`):
+
+````bash
+ollama pull llama2
+
+## Installation
+
+1. **Clone the repository:**
 
 ```bash
-# 1) Install deps (Windows: PowerShell one line)
-python -m pip install -r requirements.txt
+git clone <your-repo-url>
+cd ai-interviewer
 
-# 2) Make .env (values shown are safe defaults)
-# .env
-LLM_PROVIDER=ollama
-OLLAMA_MODEL=mistral
-OLLAMA_HOST=http://localhost:11434
-INTERVIEW_DEFAULT_TOPIC=JavaScript
-INTERVIEW_NUM_QUESTIONS=4
-# Optional generation knobs
-# OLLAMA_TEMPERATURE=0.3
-# OLLAMA_TOP_P=0.9
-# OLLAMA_NUM_CTX=2048
-# OLLAMA_NUM_PREDICT=256
 
-# 3) Pull the model locally
-ollama pull mistral
+2. **Create and Activate Virtual Environment
 
-# 4) Health check
-python -m src.app ping Respond with exactly: pong
-```
-
-### Demo (Windows PowerShell)
-
-Run an end-to-end flow (health check → single question → mini-interview → JSON log):
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts\demo.ps1 -Topic Python -Difficulty mixed -Questions 1 -Type mixed
-```
-
-**Seed questions:** place curated prompts in `data/questions.json`. The generator will use a seed for the requested topic/type if available, otherwise fall back to the LLM.
+```bash
+python -m venv .venv
+# Linux/macOS
+source .venv/bin/activate
+# Windows
+.venv\Scripts\activate
+````
