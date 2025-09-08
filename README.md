@@ -1,18 +1,33 @@
 # AI Interviewer CLI (LangGraph + Ollama)
 
-An AI-powered technical interviewer that dynamically generates questions, evaluates answers, and provides detailed feedback.  
+An AI-powered technical interviewer that dynamically generates questions, evaluates answers and provides detailed feedback.  
 Built using **Python**, **LangGraph** and **Ollama** for local LLM inference.
 
 ---
 
-## 📌 Features
+## Features
 
 ✅ Simulates a short, topic-focused technical interview  
 ✅ Dynamically generates 3–5 relevant questions from selected topics  
 ✅ Branching follow-up questions for weak or incorrect answers  
-✅ Scores answers on **accuracy, clarity, and depth**  
+✅ Scores answers on **accuracy, clarity and depth**  
 ✅ Provides a detailed **summary and feedback** at the end  
 ✅ Uses **LangGraph** for flow control and branching logic
+
+---
+
+---
+
+## 🛠 Technologies Used
+
+- **Python 3.10+**
+- **LangGraph** — for building the branching interview flow
+- **Typer** — for CLI interface
+- **Rich** — for styled terminal output
+- **Ollama** — for running local LLMs
+- **Mistral** (or **LLaMA**) — default model for question generation and evaluation
+- **dotenv** — for environment variable management
+- **pytest** — for testing
 
 ---
 
@@ -144,7 +159,7 @@ Your answer (blank line to finish): Clustering for unsupervised, regression for 
 
 ### CLI Demo — Sample Run
 
-Below are screenshots from a real CLI interview session, showing the interactive flow, scoring, and follow-up question handling.
+Below are screenshots from a real CLI interview session, showing the interactive flow, scoring and follow-up question handling.
 
 <p align="center">
   <img src="src/Test-Images/1.png" alt="CLI Demo Part 1" width="500"><br>
