@@ -139,3 +139,12 @@ Your answer (blank line to finish): Clustering for unsupervised, regression for 
 → Rationale: Examples provided, explanation improved.
 
 ```
+
+### CLI Demo — Sample Run
+
+Below are screenshots from a real CLI interview session, showing the interactive flow, scoring, and follow-up question handling.
+
+<p align="center">
+  <img src="src/Test-Images/1.png" alt="CLI Demo Part 1" width="500"><br>
+  <img src="src/Test-Images/2.png" alt="CLI Demo Part 2" width="500">
+</p>
