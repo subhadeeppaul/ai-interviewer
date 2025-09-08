@@ -21,13 +21,13 @@ Built using **Python**, **LangGraph** and **Ollama** for local LLM inference.
 ## Technologies Used
 
 - **Python 3.10+**
-- **LangGraph** — for building the branching interview flow
-- **Typer** — for CLI interface
-- **Rich** — for styled terminal output
-- **Ollama** — for running local LLMs
-- **Mistral** (or **LLaMA**) — default model for question generation and evaluation
-- **dotenv** — for environment variable management
-- **pytest** — for testing
+- **LangGraph** - for building the branching interview flow
+- **Typer** - for CLI interface
+- **Rich** - for styled terminal output
+- **Ollama** - for running local LLMs
+- **Mistral** (or **LLaMA**) - default model for question generation and evaluation
+- **dotenv** - for environment variable management
+- **pytest** - for testing
 
 ---
 
