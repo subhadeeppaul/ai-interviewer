@@ -7,12 +7,12 @@ Built using **Python**, **LangGraph** and **Ollama** for local LLM inference.
 
 ## Features
 
-✅ Simulates a short, topic-focused technical interview  
-✅ Dynamically generates 3–5 relevant questions from selected topics  
-✅ Branching follow-up questions for weak or incorrect answers  
-✅ Scores answers on **accuracy, clarity and depth**  
-✅ Provides a detailed **summary and feedback** at the end  
-✅ Uses **LangGraph** for flow control and branching logic
+- Simulates a short, topic-focused technical interview
+- Dynamically generates 3–5 relevant questions from selected topics
+- Branching follow-up questions for weak or incorrect answers
+- Scores answers on **accuracy, clarity and depth**
+- Provides a detailed **summary and feedback** at the end
+- Uses **LangGraph** for flow control and branching logic
 
 ---
 
