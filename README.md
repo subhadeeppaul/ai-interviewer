@@ -1,6 +1,18 @@
-# AI Interviewer CLI (Ollama LLM)
+# AI Interviewer CLI (LangGraph + Ollama)
 
-An AI-powered technical interviewer that dynamically generates questions, evaluates answers, and provides detailed feedback. Built using **Python**, **LangGraph**, and **Ollama** for local LLM inference.
+An AI-powered technical interviewer that dynamically generates questions, evaluates answers, and provides detailed feedback.  
+Built using **Python**, **LangGraph** and **Ollama** for local LLM inference.
+
+---
+
+## 📌 Features
+
+✅ Simulates a short, topic-focused technical interview  
+✅ Dynamically generates 3–5 relevant questions from selected topics  
+✅ Branching follow-up questions for weak or incorrect answers  
+✅ Scores answers on **accuracy, clarity, and depth**  
+✅ Provides a detailed **summary and feedback** at the end  
+✅ Uses **LangGraph** for flow control and branching logic
 
 ---
 
@@ -8,11 +20,11 @@ An AI-powered technical interviewer that dynamically generates questions, evalua
 
 - Python >= 3.10
 - Virtual environment recommended (`venv` or `conda`)
-- **Ollama installed**: [https://ollama.com/docs](https://ollama.com/docs)
-- Download a supported model in Ollama (e.g., `llama2`):
+- **Ollama installed** → [Installation Guide](https://ollama.com/docs)
+- A supported model pulled in Ollama (e.g., `mistral` or `llama2`):
 
 ```bash
-ollama pull llama2
+ollama pull mistral
 ```
 
 ## Installation
@@ -30,7 +42,7 @@ cd ai-interviewer
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate
+.venv\scripts\activate
 ```
 
 ## Install Python Dependencies
@@ -39,16 +51,12 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Configure Ollama Environment (Optional)
+## Install and Configure Ollama Environment
 
 ```bash
-export OLLAMA_MODEL="mistrel"
-```
-
-### Windows
-
-```bash
-setx OLLAMA_MODEL "mistrel"
+ollama pull mistral
+$env:OLLAMA_MODEL="mistral"
+setx OLLAMA_MODEL "mistral"
 ```
 
 ## Usage
@@ -61,40 +69,37 @@ python -m src.app interview --topic "Machine Learning" --difficulty easy --quest
 
 ## Parameters
 
-| Parameter    | Description                                               | Example                 |
-| ------------ | --------------------------------------------------------- | ----------------------- |
-| --topic      | Topic of interview questions                              | "Machine Learning"      |
-| --difficulty | Difficulty level of questions (easy, medium, hard, mixed) | easy                    |
-| --questions  | Number of main questions                                  | 4                       |
-| --type       | Question type (coding, theory, design, mixed)             | mixed                   |
-| --stdin      | Enables manual multi-line input                           | (present for CLI input) |
+| Parameter    | Description                                                | Example                        |
+| ------------ | ---------------------------------------------------------- | ------------------------------ |
+| --topic      | Topic of interview questions                               | "Machine Learning"             |
+| --topics     | Comma-separated topics (rotates across them)               | "Python,JavaScript"            |
+| --difficulty | Difficulty level of questions (easy, medium, hard, mixed)  | mixed                          |
+| --questions  | Number of main questions (follow-ups not counted)          | 4                              |
+| --type       | Question type (coding, theory, design, debugging, mixed)   | mixed                          |
+| --stdin      | Enables manual multi-line input (finish with a blank line) | (present for CLI input)        |
+| --log-json   | Save the final interview state to a JSON file              | runs/demo_20250908_120101.json |
 
 ### Example Command
 
 ```bash
-python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --type coding --stdin
+python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --type coding --stdin --log-json runs/demo.json
+
 ```
 
 ## How It Works
 
-- **Next Question Node:** Picks a new question based on topic and difficulty.
-- **Ask Node:** Displays the question and captures user input.
-- **Evaluate Node:** Scores the answer using Ollama LLM on:
+- **Next Question Node:** Rotates topics, balances difficulty (if mixed), avoids duplicates; prefers seeded question → falls back to LLM.
+- **Ask Node:** Shows the question and captures user input.
+- **Evaluate Node:** Scores with LLM on accuracy, clarity, depth, overall.
 
-  - accuracy
-  - clarity
-  - depth
-  - overall
+  - _Heuristics: very short answers or no token overlap with the question can force a follow-up._
 
-  _Short or vague answers are penalized automatically._
+- **Follow-up Node:** Generates a focused follow-up if needed.
 
-- **Follow-up Node:** Generates a follow-up question if the answer is weak.
-
-  - Limited to `MAX_FOLLOWUPS_PER_Q` per main question
-  - Ensures recursion stops and avoids `GraphRecursionError`
+  - Limited by `MAX_FOLLOWUPS_PER_Q` per main question
 
 - **Increment/Finish Node:** Tracks progress and moves to the next main question or finishes the interview.
-- **Summary Node:** Prints interview summary including:
+- **Summary Node:** Prints the interview summary:
   - Topics covered
   - Scores per topic
   - Strengths
@@ -102,8 +107,7 @@ python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --
 
 ## Optional Features
 
-- **Answer Scoring** ✅ Implemented  
-  (Evaluates accuracy, clarity, depth, overall)
+- **Answer Scoring:** Evaluates accuracy, clarity, depth, overall
 
 ### Example Run
 
@@ -112,8 +116,6 @@ $ python -m src.app interview --topic "Machine Learning" --difficulty easy --que
 ```
 
 ### Example Output
-
-### Example Interview Output
 
 ```text
 Question 1 of 2 (Topic: Machine Learning, Difficulty: easy)
@@ -129,8 +131,5 @@ Your answer (blank line to finish): Clustering for unsupervised, regression for 
 
 → Scores: accuracy=6.0, clarity=7.0, depth=5.0, overall=6.0
 → Rationale: Examples provided, explanation improved.
-```
-
-```
 
 ```
