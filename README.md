@@ -109,6 +109,12 @@ python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --
 
 - **Answer Scoring:** Evaluates accuracy, clarity, depth, overall
 
+## Branching Flow
+
+Below is the branching logic used in the interview process, implemented with LangGraph:
+
+![Branching Flow](src/Test-Images/branching-flow.png)
+
 ### Example Run
 
 ```bash
