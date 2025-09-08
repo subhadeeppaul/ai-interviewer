@@ -18,7 +18,7 @@ Built using **Python**, **LangGraph** and **Ollama** for local LLM inference.
 
 ---
 
-## 🛠 Technologies Used
+## Technologies Used
 
 - **Python 3.10+**
 - **LangGraph** — for building the branching interview flow
@@ -126,7 +126,7 @@ python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --
 
 ## Branching Flow
 
-Below is the branching logic used in the interview process, implemented with LangGraph:
+The diagram below shows how the interview logic flows between different nodes in the LangGraph pipeline, including follow-up branching when needed.
 
 <p align="center">
   <img src="src/Test-Images/branching-flow.png" alt="Branching Flow" width="500">
@@ -155,6 +155,26 @@ Your answer (blank line to finish): Clustering for unsupervised, regression for 
 → Scores: accuracy=6.0, clarity=7.0, depth=5.0, overall=6.0
 → Rationale: Examples provided, explanation improved.
 
+```
+
+### Example Summary Output
+
+```text
+===== Interview Summary =====
+Topics Covered: ['Machine Learning']
+Asked: 2 main question(s)
+Final grade: 6.5, signal: borderline
+
+Feedback: Good understanding of concepts but examples need more detail.
+
+Per-topic Performance:
+  • Machine Learning: 2 questions, Avg Score: 6.50
+
+Strengths:
+  • Clear definitions of basic ML concepts
+Recommendations:
+  • Add more real-world examples
+=============================
 ```
 
 ### CLI Demo — Sample Run
