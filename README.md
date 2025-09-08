@@ -113,7 +113,9 @@ python -m src.app interview --topic "Python" --difficulty mixed --questions 3 --
 
 Below is the branching logic used in the interview process, implemented with LangGraph:
 
-<img src="src/Test-Images/branching-flow.png" alt="Branching Flow" width="500">
+<p align="center">
+  <img src="src/Test-Images/branching-flow.png" alt="Branching Flow" width="500">
+</p>
 
 ### Example Run
 
